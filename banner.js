@@ -13,8 +13,10 @@ function growBar() {
 
 function changeBanner() {
 
-	var cur = $j("#post-ads a.opaque").attr("id").replace("image-", "");
-	var nex = "image-"+((cur+1)%3);
+	var bannerNo = $j("#post-ads a").size();
+	var cur = parseInt($j("#post-ads a.opaque").attr("id").replace("banner-", ""));
+	var nex = "banner-"+((cur+1)%bannerNo);
+
 	$j("#post-ads a").removeClass("opaque");
 	$j("#post-ads #"+nex).addClass("opaque");
 
@@ -25,20 +27,22 @@ function changeBanner() {
 $j(document).ready(function() {
 
 	growBar();
+	var bannerNo = $j("#post-ads a").size();
 	var bannerTimer = setInterval (changeBanner, displayTime );
 
 	$j("#controls span").click(function() {
 		
 		$j("#post-ads a").removeClass("opaque");
 
-		var imageToShow = $j(this).attr("id").replace("to-", "");
- 		var adjust = $j(this).attr("class").replace("a", "");
+		var imageToShow = parseInt($j(this).attr("id").replace("to-", ""));
+ 		var adjust = parseInt($j(this).attr("class").replace("a", ""));
 
  		$j("#controls span").attr("id",function() {
- 			return "to-"+(($j(this).attr("id").replace("to-", "")+adjust)%3);
+ 			var to = parseInt($j(this).attr("id").replace("to-", ""));
+ 			return "to-"+((to+adjust)%bannerNo);
  		});
 
-		$j("#post-ads #image-"+imageToShow).addClass("opaque");
+		$j("#post-ads #banner-"+imageToShow).addClass("opaque");
 
 	});
 
