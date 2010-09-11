@@ -4,7 +4,7 @@ Plugin Name: Scrolly Banner Thing
 Plugin URI: http://omgubuntu.co.uk
 Description: Fade some massive images for some reason (with links!). 
 Author: Niall Molloy
-Version: 0.00004
+Version: 0.5
 Author URI: http://purplejam.co.uk
 License: GPL v3
 */
