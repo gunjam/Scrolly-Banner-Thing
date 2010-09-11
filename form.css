@@ -1,0 +1,8 @@
+#sbt-container div {
+	margin:0 0 0.5em;
+	background:#efefef;
+}
+#sbt-container h3 {
+	background:#f5f5f5;
+	font-weight: bold;
+}

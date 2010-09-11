@@ -1,16 +1,15 @@
 <?php
 /*
 Plugin Name: Scrolly Banner Thing
-Plugin URI: http://omgubuntu.co.uk
+Plugin URI: http://github.com/gunjam/Scrolly-Banner-Thing
 Description: Fade some massive images for some reason (with links!). 
 Author: Niall Molloy
-Version: 0.5
+Version: 0.6
 Author URI: http://purplejam.co.uk
 License: GPL v3
 */
       
-$SBT_PLUGIN_NAME  = "Scrolly Banner Thing";
-$SBT_WIDGET_TITLE = "Scrolly Banner Thing";
+$SBT_WIDGET_TITLE = $SBT_PLUGIN_NAME  = "Scrolly Banner Thing";
 
 add_action("plugins_loaded", "scrolly_banner_thing_init");
 
@@ -21,11 +20,17 @@ function scrolly_banner_thing_init() {
 		wp_register_script('banner', '/'.PLUGINDIR.'/scrolly-banner-thing/banner.js', array('jquery'), '1.4');
 		wp_enqueue_script('jquery');
 		wp_enqueue_script('banner');
+
+		wp_register_style('banner-style', '/'.PLUGINDIR.'/scrolly-banner-thing/banner.css', false, '0.1');
+		wp_enqueue_style('banner-style');
 	}
 	else {
 		wp_register_script('form', '/'.PLUGINDIR.'/scrolly-banner-thing/form.js', array('jquery'), '1.3');
 		wp_enqueue_script('jquery');
 		wp_enqueue_script('form');
+
+		wp_register_style('form-style', '/'.PLUGINDIR.'/scrolly-banner-thing/form.css', false, '0.1');
+		wp_enqueue_style('form-style');
 	}
 
 	scrolly_banner_thing_setup ();
@@ -69,10 +74,7 @@ function scrolly_banner_thing_setup () {
 
 	$options = get_option ($SBT_PLUGIN_NAME);
 	if ( !is_array ($options) || !count($options) ) {
-		$options = array ("banner-0" => array("image" => "", "post" => ""),
-				   "banner-1" => array("image" => "", "post" => ""),
-				   "banner-2" => array("image" => "", "post" => "")
-				  );
+		$options = array ("banner-0" => array("image" => '/'.PLUGINDIR.'/scrolly-banner-thing/default.jpg', "post" => "/about"));
 		update_option ($SBT_PLUGIN_NAME, $options);
 	}
 }
@@ -98,7 +100,7 @@ function scrolly_banner_thing_preferences () {
 	
 	for ( $i = 0; $i < count($options); $i++ ) {
 		$form .= "
-			<div id=\"sbt-$i\" style=\"margin:0 0 0.5em;background:#efefef;\"><p style=\"background:#f5f5f5;\"><strong>Banner ".($i+1)."</strong></p><p><label for=\"sbt-image-$i\">Image URL:</label>
+			<div id=\"sbt-$i\"><h3>Banner ".($i+1)."</h3><p><label for=\"sbt-image-$i\">Image URL:</label>
 			<input type=\"text\" id=\"sbt-image-$i\" name=\"banner-{$i}[image]\" value=\"" . $options["banner-$i"]['image'] . "\" /></p>
 			<p><label for=\"sbt-post-$i\">Post URL:</label>
 			<input type=\"text\" id=\"sbt-post-$i\" name=\"banner-{$i}[post]\" value=\"" . $options["banner-$i"]['post'] . "\" /></p></div>
