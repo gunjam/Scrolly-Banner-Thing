@@ -4,7 +4,7 @@ Plugin Name: Scrolly Banner Thing
 Plugin URI: http://github.com/gunjam/Scrolly-Banner-Thing
 Description: Fade some massive images for some reason (with links!). 
 Author: Niall Molloy
-Version: 0.6
+Version: 0.7
 Author URI: http://purplejam.co.uk
 License: GPL v3
 */
@@ -17,11 +17,11 @@ function scrolly_banner_thing_init() {
 	global $SBT_WIDGET_TITLE;
 
 	if (!is_admin()) {
-		wp_register_script('banner', '/'.PLUGINDIR.'/scrolly-banner-thing/banner.js', array('jquery'), '1.4');
+		wp_register_script('banner', '/'.PLUGINDIR.'/scrolly-banner-thing/banner.js', array('jquery'), '1.5');
 		wp_enqueue_script('jquery');
 		wp_enqueue_script('banner');
 
-		wp_register_style('banner-style', '/'.PLUGINDIR.'/scrolly-banner-thing/banner.css', false, '0.1');
+		wp_register_style('banner-style', '/'.PLUGINDIR.'/scrolly-banner-thing/banner.css', false, '0.2');
 		wp_enqueue_style('banner-style');
 	}
 	else {
