@@ -58,13 +58,16 @@ function scrolly_banner_thing_get_content () {
 		$content .= "<a id=\"$k\" ";
 		if ( $k == "banner-0" ) $content .= "class=\"opaque\" ";
 		$content .= "href=\"{$v['post']}\"><img width=\"960\" height=\"200\" src=\"{$v['image']}\" alt=\"banner\"/></a>";
+		$chooser .= "<li class=\"to-" .  substr($k,7);
+		if ( $k == "banner-0" ) $chooser .= " displaying";
+		$chooser .= "\"></li>";
 	}
 
 	$previous = count($options)-1;
 
 	return $content .= "
 		<div id=\"bar-container\"><div id=\"bar\"></div></div>
-		<p id=\"controls\"><span id=\"to-$previous\" class=\"$previous\"></span><span id=\"to-1\" class=\"a1\"></span></p>
+		<div id=\"controls\"><ul id=\"adjuster\"><li id=\"a$previous\" class=\"to-$previous\"></li><li id=\"a1\" class=\"to-1\"></li></ul><ul id=\"chooser\">$chooser</ul></div>
 		</div>
 	";
 }
