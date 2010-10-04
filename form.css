@@ -1,8 +1,40 @@
-#sbt-container div {
-	margin:0 0 0.5em;
-	background:#efefef;
+#sbt-container li {
+	margin: 0 0 1em 0;
+	cursor: move;
+}
+#sbt-container h3, #sbt-container li p {
+	padding: 5px;
+	margin: 0;
+	text-shadow: 0 1px 0 #fff;
 }
 #sbt-container h3 {
 	background:#f5f5f5;
 	font-weight: bold;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#EFEFEF));
+	border: 1px solid #efefef;
+	border-radius: 4px 4px 0 0;
+	-webkit-border-radius: 4px 4px 0 0;
+	-moz-border-radius: 4px 4px 0 0;
+}
+#sbt-container h3 span {
+	float: right;
+	cursor: pointer;
+	font-weight: bold;
+}
+#sbt-container h3 span:hover {
+	color: #bd3c3c;
+}
+#sbt-container label {
+	float: left;
+}
+#sbt-container p input {
+	float: right;
+}
+#sbt-container li p {
+	background:#efefef;
+	clear: both;
+	overflow: auto;
+}
+.sbt-placeholder {
+	border: 2px dashed #efefef;
 }
