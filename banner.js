@@ -1,11 +1,10 @@
-$j = jQuery.noConflict();
 var displayTime = 10000;
 
 function growBar() {
 
-	$j("#bar").stop(true, true);
-	$j("#bar").css("width","0%");
-	$j("#bar").animate({
+	jQuery("#bar").stop(true, true);
+	jQuery("#bar").css("width","0%");
+	jQuery("#bar").animate({
 		width: '100%',
 	}, displayTime, 'linear');
 
@@ -13,52 +12,52 @@ function growBar() {
 
 function changeBanner() {
 
-	var bannerNo = $j("#post-ads a").size();
-	var cur = parseInt($j("#post-ads a.opaque").attr("id").replace("banner-", ""));
+	var bannerNo = jQuery("#post-ads a").size();
+	var cur = parseInt(jQuery("#post-ads a.opaque").attr("id").replace("banner-", ""));
 	var nex = (cur+1)%bannerNo;
 
-	$j("#post-ads a").removeClass("opaque");
-	$j("#post-ads #banner-"+nex).addClass("opaque");
+	jQuery("#post-ads a").removeClass("opaque");
+	jQuery("#post-ads #banner-"+nex).addClass("opaque");
 	
-	$j("#chooser li").removeClass("displaying");
-	$j("#chooser .to-"+nex).addClass("displaying");
+	jQuery("#chooser li").removeClass("displaying");
+	jQuery("#chooser .to-"+nex).addClass("displaying");
 
 	growBar();
 
 }
 
-$j(document).ready(function() {
+jQuery(document).ready(function() {
 
 	growBar();
-	var bannerNo = $j("#post-ads a").size();
+	var bannerNo = jQuery("#post-ads a").size();
 	var bannerTimer = setInterval (changeBanner, displayTime );
 
-	$j("#controls li").click(function() {
+	jQuery("#controls li").click(function() {
 		
-		$j("#post-ads a").removeClass("opaque");
-		$j("#chooser li").removeClass("displaying");
+		jQuery("#post-ads a").removeClass("opaque");
+		jQuery("#chooser li").removeClass("displaying");
 
-		var imageToShow = parseInt($j(this).attr("class").replace("to-", ""));
+		var imageToShow = parseInt(jQuery(this).attr("class").replace("to-", ""));
 
- 		if ( $j(this).attr("id") ) { var adjust = parseInt($j(this).attr("id").replace("a", "")); }
+ 		if ( jQuery(this).attr("id") ) { var adjust = parseInt(jQuery(this).attr("id").replace("a", "")); }
  		else { var test = null; }
 
- 		$j("#adjuster li").attr("class",function() {
- 			if ( !test ) { adjust = parseInt($j(this).attr("id").replace("a", "")); to = imageToShow; }
- 			else { var to = parseInt($j(this).attr("class").replace("to-", "")); }
+ 		jQuery("#adjuster li").attr("class",function() {
+ 			if ( !test ) { adjust = parseInt(jQuery(this).attr("id").replace("a", "")); to = imageToShow; }
+ 			else { var to = parseInt(jQuery(this).attr("class").replace("to-", "")); }
  			return "to-"+((to+adjust)%bannerNo);
  		});
 
-		$j("#post-ads #banner-"+imageToShow).addClass("opaque");
-		$j("#chooser .to-"+imageToShow).addClass("displaying");
+		jQuery("#post-ads #banner-"+imageToShow).addClass("opaque");
+		jQuery("#chooser .to-"+imageToShow).addClass("displaying");
 
 	});
 
-	$j("#post-ads").hover(
+	jQuery("#post-ads").hover(
 		function() {
 			clearInterval(bannerTimer);
-			$j("#bar").stop(true, true);
-			$j("#bar").css("width","0%");
+			jQuery("#bar").stop(true, true);
+			jQuery("#bar").css("width","0%");
 		},
 		function() {
 			bannerTimer = setInterval(changeBanner, displayTime);
